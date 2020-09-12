@@ -35,6 +35,7 @@ SOURCES += \
     pixelgroup.cpp \
     canvas.cpp \
     penroseshapegroup.cpp \
+    rasterizedshape.cpp \
     stepwidget.cpp \
     svgexportwidget.cpp
 
@@ -47,6 +48,8 @@ HEADERS += \
     pixelgroup.h \
     canvas.h \
     penroseshapegroup.h \
+    rasterizedshape.h \
+    shapegroup.h \
     stepwidget.h \
     svgexportwidget.h
 

@@ -26,10 +26,10 @@ class PenroseTiling
 {
 protected:
     std::vector<Triangle> triangles;
-    double size = 300.0;
+    double size = 100.0;
     TilingType tilingtype = TilingType::NORMAL;
 public:
-    PenroseTiling(double size = 300.0);
+    PenroseTiling(double size = 100.0);
     void levelup();
     void resetTiling();
     template<class CB>

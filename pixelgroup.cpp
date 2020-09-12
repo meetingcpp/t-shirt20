@@ -44,7 +44,7 @@ bool PixelGroup::isInGroup(const Point& p)
 
 bool PixelGroup::isInRefRect(const penrose::Triangle &t)
 {
-    std::vector<Point> pvec= {{t.a.real(),t.a.imag()},{t.b.real(),t.b.imag()},{t.c.real(),t.c.imag()}};
+    std::vector<Point> pvec= {{static_cast<int>(t.a.real()),static_cast<int>(t.a.imag())},{static_cast<int>(t.b.real()),static_cast<int>(t.b.imag())},{static_cast<int>(t.c.real()),static_cast<int>(t.c.imag())}};
     return refrect.contains(groupRect(pvec));
 }
 

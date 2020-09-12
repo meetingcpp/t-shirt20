@@ -23,6 +23,8 @@ public:
     {
         return group.translatePoint(c);
     }
+    bool is_in_group(int x,int y);
+    bool triangle_in_group(const Triangle& t);
 };
 }
 

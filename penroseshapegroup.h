@@ -3,6 +3,7 @@
 
 #include "penroseshape.h"
 
+
 namespace penrose {
 
 class PenroseShapeGroup

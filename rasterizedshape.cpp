@@ -6,4 +6,9 @@ RasterizedShape::RasterizedShape(PixelGroup&& pg):group(std::move(pg))
 {
 
 }
+
+void RasterizedShape::step()
+{
+
+}
 }

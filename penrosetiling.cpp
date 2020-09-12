@@ -1,8 +1,17 @@
 #include "penrosetiling.h"
 
+#include <QDebug>
 
 namespace penrose {
 
+bool goToNextLevel(const Triangle& t)
+{
+    /*double abx = std::abs(t.a.imag() - t.b.imag());
+    double aby = std::abs(t.a.real() - t.b.real());
+    if(std::abs(abx-aby) < 5)//distance is less then 5 pixel
+        return false;*/
+    return true;
+}
 
 const double goldenratio = (1 + sqrt(5))/2;
 
@@ -12,34 +21,46 @@ void divide(std::vector<Triangle>& sub,const Triangle &t, TilingType tilingtype)
     {
         if(t.color == Color::RED)
         {
+            //if(goToNextLevel(t))
+            {
             auto p = t.a + (t.b-t.a) / goldenratio;
             sub.push_back({Color::RED,t.c,p,t.b});
             sub.push_back({Color::BLUE,p,t.c,t.a});
+            }
         }
         else if(t.color == Color::BLUE)
         {
+            //if(goToNextLevel(t))
+            {
             auto q = t.b + (t.a - t.b) / goldenratio;
             auto r = t.b + (t.c - t.b) / goldenratio;
             sub.push_back({Color::BLUE,r,t.c,t.a});
             sub.push_back({Color::BLUE,q,r,t.b});
             sub.push_back({Color::RED,r,q,t.a});
+            }
         }
     }
     else
     {
         if(t.color == Color::RED)
         {
+            //if(goToNextLevel(t))
+            {
             auto q = t.a + (t.b-t.a) / goldenratio;
             auto r = t.b + (t.c - t.b) / goldenratio;
             sub.push_back({Color::BLUE,r,q,t.b});
             sub.push_back({Color::RED,q,t.a,r});
             sub.push_back({Color::RED,t.c,t.a,r});
+            }
         }
         else if(t.color == Color::BLUE)
         {
+            //if(goToNextLevel(t))
+            {
             auto p = t.c + (t.a - t.c) / goldenratio;
             sub.push_back({Color::BLUE,t.b,p,t.a});
             sub.push_back({Color::RED,p,t.c,t.b});
+            }
         }
     }
 }
