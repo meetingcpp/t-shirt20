@@ -63,12 +63,12 @@ bool PenroseShape::is_in_group(int x, int y)
 
 bool PenroseShape::triangle_in_group(const Triangle &t)
 {
-    auto distance = [](auto a, auto b){
+    /*auto distance = [](auto a, auto b){
         Point pa(a.real(),a.imag()),pb(b.real(),b.imag());
         QLine l(pa,pb);
         return l.dx() < 10 && l.dy() < 10;
-    };
-    return distance(t.a,t.c) && is_in_group(t.a.real(),t.a.imag()) && is_in_group(t.b.real(),t.b.imag()) && is_in_group(t.c.real(),t.c.imag());
+    };distance(t.a,t.c) && //*/
+    return is_in_group(t.a.real(),t.a.imag()) && is_in_group(t.b.real(),t.b.imag()) && is_in_group(t.c.real(),t.c.imag());
 }
 
 }

@@ -3,6 +3,10 @@
 
 #include <vector>
 
+enum ShapeType{
+    PENROSE,RASTER
+};
+
 template<class Shape>
 class ShapeGroup
 {
