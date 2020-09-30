@@ -1,9 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <variant>
+
 #include <QMainWindow>
 
-#include "penroseshapegroup.h"
+#include "concretetypes.h"
 
 namespace Ui {
 class MainWindow;
@@ -13,9 +15,11 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
     QImage filter;
+    ShapeType mode=ShapeType::RASTER;
     penrose::PenroseShapeGroup psg;
+    t_shapegroup shapes;
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:

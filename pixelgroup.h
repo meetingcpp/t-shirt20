@@ -24,6 +24,7 @@ class PixelGroup
 public:
     PixelGroup(const pixelgroup& pg);
     bool isInGroup(const Point &p);
+    bool isLocalPointInGroup(const Point &p);
     bool isInRefRect(const penrose::Triangle &t);
     double getCircumference() const;
     auto begin()const{return group.cbegin();}
@@ -35,6 +36,10 @@ public:
     Point translatePoint(const complex& p)const
     {
         return Point(p.real()+xoff+refpoint.x(),p.imag()+yoff + refpoint.y());
+    }
+    Point translatePoint(Point& p)const
+    {
+        return Point(p.x()+refpoint.x(),p.y() + refpoint.y());
     }
     Rect getRefrect() const;
 };

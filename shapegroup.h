@@ -24,6 +24,7 @@ public:
            cb(ps);
    }
    auto size()const{return group.size();}
+   auto front()const{return group.front();}
 };
 
 #endif // SHAPEGROUP_H

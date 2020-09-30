@@ -42,6 +42,12 @@ bool PixelGroup::isInGroup(const Point& p)
     return std::binary_search(group.begin(),group.end(),p1);
 }
 
+bool PixelGroup::isLocalPointInGroup(const Point &p)
+{
+    Point p1(p.x() +refpoint.x(),p.y()+refpoint.y());
+    return std::binary_search(group.begin(),group.end(),p1);
+}
+
 bool PixelGroup::isInRefRect(const penrose::Triangle &t)
 {
     std::vector<Point> pvec= {{static_cast<int>(t.a.real()),static_cast<int>(t.a.imag())},{static_cast<int>(t.b.real()),static_cast<int>(t.b.imag())},{static_cast<int>(t.c.real()),static_cast<int>(t.c.imag())}};

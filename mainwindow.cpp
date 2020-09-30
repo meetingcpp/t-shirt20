@@ -14,6 +14,8 @@
 #include "pixelgrouprunner.h"
 #include "stepwidget.h"
 #include "svgexportwidget.h"
+#include "pixelgroup.h"
+#include "shapegroup.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -41,15 +43,30 @@ void MainWindow::on_actionSet_Markimage_triggered()
     if(!file.isEmpty())
     {
         filter = QImage(file);
-
         auto pgr = new PixelGroupRunner(filter,this);
         QThreadPool::globalInstance()->start(pgr );
         connect(pgr,&PixelGroupRunner::finished,this,[this](const PixelModel& m){
-            penrose::PenroseShapeGroup psg;
-            m.visit([this,&psg](const auto& pg){
-                psg.addShape(penrose::PenroseShape(std::move(pg)));
-            });
-            ui->tabWidget->addTab(new StepWidget(std::move(psg),ui->tabWidget),QString("Mask %1").arg(ui->tabWidget->count()));
+            t_shapegroup shapes;
+            switch (mode) {
+                case ShapeType::PENROSE:
+                    shapes = penrose::PenroseShapeGroup{};
+                break;
+                case ShapeType::RASTER:
+                    shapes = ShapeGroup<cpp20tshirt::RasterizedShape>{};
+                break;
+            }
+                //penrose::PenroseShapeGroup psg;
+                m.visit([&shapes](auto& pg){
+                    //psg.addShape(penrose::PenroseShape(std::move(pg)));
+                    std::visit([&pg](auto& v){
+                        using T = std::decay_t<decltype(v)>;
+                        if constexpr (std::is_same_v<T, penrose::PenroseShapeGroup>)
+                          v.addShape(penrose::PenroseShape(std::move(pg)));
+                        else if constexpr (std::is_same_v<T, ShapeGroup<cpp20tshirt::RasterizedShape>>)
+                          v.addShape(cpp20tshirt::RasterizedShape(std::move(pg)));
+                    },shapes);
+                });
+            ui->tabWidget->addTab(new StepWidget(std::move(shapes),ui->tabWidget),QString("Mask %1").arg(ui->tabWidget->count()));
         });
     }
 }

@@ -20,6 +20,12 @@ public:
         for(const auto& pg:groups)
             cb(pg);
     }
+    template<class CB>
+    void visit( CB& cb)
+    {
+        for( auto& pg:groups)
+            cb(pg);
+    }
 
 private:
     std::vector<Point> neighbors(const Point& p);

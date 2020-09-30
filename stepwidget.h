@@ -5,7 +5,8 @@
 #include <QPainter>
 #include <functional>
 
-#include "penroseshapegroup.h"
+//#include "penroseshapegroup.h"
+#include "concretetypes.h"
 
 namespace Ui {
 class StepWidget;
@@ -16,13 +17,13 @@ class StepWidget : public QWidget
     Q_OBJECT
 
     using paintcb = std::function<void(QPainter&)>;
-    paintcb dopaint;
-    penrose::PenroseShapeGroup psg;
+    t_shapegroup sg;
+    int counter = 0,limit =20;
 public:
-    explicit StepWidget(penrose::PenroseShapeGroup&& psga, QWidget *parent = 0);
+    explicit StepWidget(t_shapegroup&& shapes, QWidget *parent = nullptr);
     ~StepWidget();
 
-    void setDopaint(const paintcb &value);
+    //void setDopaint(const paintcb &value);
 
 private slots:
     void on_btn_levelup_clicked();
